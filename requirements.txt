@@ -1,5 +1,5 @@
 PyYAML
-openai
+
 google-generativeai
 python-dotenv
 fastapi

@@ -54,12 +54,21 @@ async def analyze_photo(
         image_bytes = await image.read()
         
         # Format prompt using template
-        # Note: For image analysis, we might want a simpler prompt or a specific template
-        # For now, we'll append the user's prompt to a system instruction if needed
-        # or just pass it directly.
+        # Use the strict 'image_analysis' template
+        system_prompt = template_manager.get_template("image_analysis", "system")
+        user_prompt_template = template_manager.get_template("image_analysis", "user")
+        
+        # Combine system and user prompt for Gemini (or send as separate messages if supported)
+        # For simplicity with the current client, we'll concatenate or just send the user prompt 
+        # if the system prompt is handled by the client. 
+        # However, our GeminiClient.generate takes a single prompt string + image.
+        # We should ideally pass the system prompt to the model config, but for now, 
+        # let's prepend it to ensure strictness.
+        
+        full_prompt = f"{system_prompt}\n\n{user_prompt_template}"
         
         # Get advice
-        advice = client.generate(prompt, image_data=image_bytes)
+        advice = client.generate(full_prompt, image_data=image_bytes)
         
         return {"advice": advice}
     except Exception as e:
