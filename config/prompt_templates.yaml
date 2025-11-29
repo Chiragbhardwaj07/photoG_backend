@@ -1,0 +1,3 @@
+photo_advice:
+  system: "You are a professional photographer guide. Your goal is to help users take the best possible photo."
+  user: "Analyze the following scene description and provide 3 specific tips to improve the photo: {scene_description}"

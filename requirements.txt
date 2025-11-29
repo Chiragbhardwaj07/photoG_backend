@@ -1,0 +1,12 @@
+PyYAML
+openai
+google-generativeai
+python-dotenv
+fastapi
+uvicorn
+python-multipart
+Pillow
+
+
+
+
