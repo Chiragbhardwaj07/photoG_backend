@@ -55,8 +55,9 @@ async def analyze_photo(
         
         # Format prompt using template
         # Use the strict 'image_analysis' template
-        system_prompt = template_manager.get_template("image_analysis", "system")
-        user_prompt_template = template_manager.get_template("image_analysis", "user")
+        template = template_manager.get_template("image_analysis")
+        system_prompt = template.get("system", "")
+        user_prompt_template = template.get("user", "")
         
         # Combine system and user prompt for Gemini (or send as separate messages if supported)
         # For simplicity with the current client, we'll concatenate or just send the user prompt 
